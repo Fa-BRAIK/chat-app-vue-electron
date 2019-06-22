@@ -19,10 +19,15 @@ io.on('connection', socket => {
 
     socket.on('login', data => {
         username = data.username;
-        users.add(username);
-
-        console.log('A user has logged in, users are ', users);
-
-        io.sockets.emit('login', { username, users: Array.from(users) });
+        if (users.has(username)) {
+            console.log('Username already exits, try another one')
+            io.sockets.emit('UserAlreadyExists', { message: 'Username already exits, try another one' } );
+        } else {
+            users.add(username);
+    
+            console.log('A user has logged in, users are ', users);
+    
+            io.sockets.emit('login', { username, users: Array.from(users) });
+        }
     });
 });
