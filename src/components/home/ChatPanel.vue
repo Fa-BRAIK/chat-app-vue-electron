@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../scss/colors.scss';
+@import '../../scss/colors.scss';
 
 .chat-bubble {
   padding: 10px 14px;
