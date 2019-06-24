@@ -3,8 +3,8 @@
     <div class="settings-tray">
       <img class="profile-image" src="/img/avatar.svg" alt="">
     </div>
-    <div v-if="friends.length === 0"> 
-      <h3 class="display-4">You have no contact!</h3>
+    <div class="text-center" v-if="friends.length === 0"> 
+      <h6 class="display-5">You have no contact online!</h6>
     </div>
       <div v-else v-for="(friend, index) in friends" :key="index">
         <div class="friend-drawer">

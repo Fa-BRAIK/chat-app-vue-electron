@@ -2,8 +2,10 @@
     <div class="chat-panel">
         <div class="row no-gutters" v-for="(message, index) in chatPanel" :key="index">
             <div class="col-md-3" :class="message.side">
+                
                 <div class="chat-bubble">
-                    {{ message.content }}
+                    <h6 class="nameOfSender">{{message.username}} : </h6>
+                     {{ message.content }}
                 </div>
             </div>
         </div>
@@ -68,10 +70,18 @@ export default {
 @import '../../scss/colors.scss';
 
 .chat-bubble {
-  padding: 10px 14px;
+  padding: 10px 15px;
   background: #eee;
-  margin: 10px 30px;
-  border-radius: 9px;
+  margin: 2px 7px;
+  border-radius: 20px;
+}
+.chat-bubble h6{
+    float: left;
+    padding-right: 5px
+}
+.nameOfSender{
+    float: left;
+    margin-bottom: 5px;
 }
 
 @keyframes slideFromLeft {

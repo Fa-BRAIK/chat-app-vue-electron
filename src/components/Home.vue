@@ -14,11 +14,10 @@
                 <img class="profile-image" src="http://www.allmyfriends.it/robocop.jpg" alt="">
                 <div class="text">
                     <h6>Robo Cop</h6>
-                    <p class="text-muted">Layin' down the law since like before Christ...</p>
+                    
                 </div>
                 <span class="settings-tray--right">
                   <i class="material-icons">cached</i>
-                  <i class="material-icons">message</i>
                   <i class="material-icons">menu</i>
                 </span>
             </div>
