@@ -27,6 +27,7 @@ export default {
         login() { 
             console.log( { server: this.server, username: this.username } ) 
             this.$socket.emit('login', { server: this.server, username: this.username })
+            
         },
         isErrorMessage() { return this.errorMessage !== '' }
     },

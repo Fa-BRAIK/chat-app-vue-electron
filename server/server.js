@@ -37,5 +37,11 @@ io.on('connection', socket => {
         socket.broadcast.emit('logout', { username, users: Array.from(users) })
     })
 
+    socket.on('message', function onMessage(data) {
+        const text = data.text;
+        console.log(data);
+        socket.emit('message', { username, text });
+    });
+
 
 });
