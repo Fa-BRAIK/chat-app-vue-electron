@@ -1,7 +1,12 @@
 <template>
   <div class="row no-gutters">
     <div class="col-md-4 border-right">
-      <friend-drawer @user:changed='userChangeEvent($event)'></friend-drawer>
+      <friend-drawer 
+        :username="userInfo.username"
+        :users="userInfo.users"
+        @user:changed='userChangeEvent($event)'
+      >
+      </friend-drawer>
     </div>
     <div class="col-md-8">
         <div class="settings-tray">
@@ -12,13 +17,13 @@
                     <p class="text-muted">Layin' down the law since like before Christ...</p>
                 </div>
                 <span class="settings-tray--right">
-                    <i class="material-icons">cached</i>
-                    <i class="material-icons">message</i>
-                    <i class="material-icons">menu</i>
+                  <i class="material-icons">cached</i>
+                  <i class="material-icons">message</i>
+                  <i class="material-icons">menu</i>
                 </span>
             </div>
         </div>
-        <chat-panel :userId='user_id'></chat-panel>
+        <chat-panel :username='username'></chat-panel>
     </div>
   </div>
 </template>
@@ -28,18 +33,35 @@ import FriendDrawer from './home/FriendDrawer'
 import ChatPanel from './home/ChatPanel'
 
 export default {
+  props: {
+    username: String,
+    users: Array
+  },
   name: 'app',
   data: () => ({
-    user_id: -1
+    choosedUser: -1,
+    userInfo: {
+      username: '',
+      users: []
+    }
   }),
   methods: {
-    userChangeEvent(user_id) { this.user_id = user_id }
+    userChangeEvent(username) { this.choosedUser = username },
   },
-  components: { FriendDrawer, ChatPanel }
+  sockets: {
+    login: function(data) {
+      this.userInfo.users = data.users
+    }
+  },
+  components: { FriendDrawer, ChatPanel },
+  mounted() {
+    this.userInfo.username = this.username
+    this.userInfo.users = this.users
+  }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../scss/colors.scss';
 
 html, body {
@@ -47,8 +69,8 @@ html, body {
 }
 
 #app {
-  min-width: 100vw;
-  min-height: 100vh !important;
+  min-width: 100vw !important;
+  min-height: 100% !important;
 }
 
 body {
@@ -56,8 +78,8 @@ body {
 }
 
 .container {
-  min-height: 100vh !important;
-  min-width: 100vw;
+  min-height: 100% !important;
+  min-width: 100vw !important;
   margin :0;
   padding: 0;
   background: #fff;

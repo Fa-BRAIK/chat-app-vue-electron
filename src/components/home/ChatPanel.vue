@@ -11,7 +11,7 @@
             <div class="col-12">
                 <div class="chat-box-tray">
                     <i class="material-icons">attach_file</i>
-                    <input type="text" placeholder="Type your message here...">
+                    <input class="form-control" type="text" v-model="message" placeholder="Type your message here..." @keypress.enter="sendMessage()">
                     <i class="material-icons">send</i>
                 </div>
             </div>
@@ -22,52 +22,44 @@
 <script>
 export default {
     props: {
-        userId: Number
-    },
-    watch: {
-        userId: function(newVal, oldVal) {
-            console.log('user_id changed!')
-            console.log('the old value is', oldVal, 'the new value is', newVal)
-        }
+        username: String
     },
     data: () => ({
+        message: '',
         chatPanel: [
-            {
-                content: 'Hello dude!',
-                side: ''
-            },
-            {
-                content: 'Hello dude!',
-                side: 'offset-md-9'
-            },
-            {
-                content: 'Hello dude!',
-                side: 'offset-md-9'
-            },
-            {
-                content: 'Hello dude!',
-                side: ''
-            },
-            {
-                content: 'Hello dude!',
-                side: ''
-            },
-            {
-                content: 'Hello dude!',
-                side: ''
-            },
-            {
-                content: 'Hello dude!',
-                side: 'offset-md-9'
-            },
-            {
-                content: 'Hello dude!',
-                side: 'offset-md-9'
-            }
+            // {
+            //     content: 'Hello dude!',
+            //     side: '',
+            //     username: ''
+            // },
+            // {
+            //     content: 'Hello dude! aaa',
+            //     side: 'offset-md-9',
+            //     username: ''
+            // },
         ]
     }),
-    created() {
-        console.log(this.userId)
+    methods: {
+        sendMessage() {
+            if (this.message !== '') {
+                let data = {
+                    content: this.message, 
+                    side: 'offset-md-9', 
+                    username: this.username
+                }
+                this.chatPanel.push( data )
+
+                console.log(this.chatPanel)
+                this.$socket.emit('message', data)
+                this.message = ''
+            }
+        }
+    },
+    sockets: {
+        publicMessage: function(data) {
+            if (data.username !== this.username) 
+                this.chatPanel.push(data)
+        }
     }
 }
 </script>

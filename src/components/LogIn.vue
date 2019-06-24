@@ -25,23 +25,27 @@ export default {
     }),
     methods: {
         login() { 
-            console.log( { server: this.server, username: this.username } ) 
             this.$socket.emit('login', { server: this.server, username: this.username })
-            
         },
         isErrorMessage() { return this.errorMessage !== '' }
     },
     sockets: {
-        UserAlreadyExists: function(data) {
+        userAlreadyExists: function(data) {
             this.errorMessage = data.message
+        },
+        login: function(data) {
+            if (data.username === this.username) {
+                this.$emit('login', { username: data.username, users: data.users })
+                this.$router.push({ name: 'home' })
+            }
         }
-    }
+    },
 }
 </script>
 
 <style lang="scss" scoped>
 .row {
-    margin-top: 25%;
+    margin-top: 5%;
 }
 
 #login {

@@ -21,7 +21,7 @@ io.on('connection', socket => {
         username = data.username;
         if (users.has(username)) {
             console.log('Username already exits, try another one')
-            io.sockets.emit('UserAlreadyExists', { message: 'Username already exits, try another one' });
+            io.sockets.emit('userAlreadyExists', { message: 'Username already exits, try another one' });
         } else {
             users.add(username);
 
@@ -31,17 +31,17 @@ io.on('connection', socket => {
         }
     });
 
+    socket.on('message', data =>  {
+        console.log(data);
+
+        data.side = '';
+        
+        io.sockets.emit('publicMessage', data)
+    });
+
     socket.on('disconnect', () => {
         users.delete(username);
         console.log('A user has logged off, users are ', users);
         socket.broadcast.emit('logout', { username, users: Array.from(users) })
     })
-
-    socket.on('message', function onMessage(data) {
-        const text = data.text;
-        console.log(data);
-        socket.emit('message', { username, text });
-    });
-
-
 });
