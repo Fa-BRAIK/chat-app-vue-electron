@@ -111,6 +111,7 @@ export default {
   vertical-align: baseline;
   background: #fff;
   transition: .3s ease;
+  min-height: 50px;
   
   &--grey {
     background: #eee;
@@ -118,6 +119,7 @@ export default {
   
   .text {
     margin-left: 12px;
+    margin-top: 10px;
     width: 70%;
     
     h6 {

@@ -11,11 +11,7 @@
     <div class="col-md-8">
         <div class="settings-tray">
             <div class="friend-drawer no-gutters friend-drawer--grey">
-                <img class="profile-image" src="http://www.allmyfriends.it/robocop.jpg" alt="">
-                <div class="text">
-                    <h6>Robo Cop</h6>
-                    
-                </div>
+                
                 <span class="settings-tray--right">
                   <i class="material-icons">cached</i>
                   <i class="material-icons">menu</i>

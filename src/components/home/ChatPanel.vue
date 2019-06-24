@@ -1,7 +1,7 @@
 <template>
     <div class="chat-panel">
         <div class="row no-gutters" v-for="(message, index) in chatPanel" :key="index">
-            <div class="col-md-3" :class="message.side">
+            <div class="col-md-5" :class="message.side">
                 
                 <div class="chat-bubble">
                     <h6 class="nameOfSender">{{message.username}} : </h6>
@@ -46,13 +46,14 @@ export default {
             if (this.message !== '') {
                 let data = {
                     content: this.message, 
-                    side: 'offset-md-9', 
+                    side: 'offset-md-7', 
                     username: this.username
                 }
+                this.$socket.emit('message', data)
+                data.username = "me"
                 this.chatPanel.push( data )
 
                 console.log(this.chatPanel)
-                this.$socket.emit('message', data)
                 this.message = ''
             }
         }
@@ -69,6 +70,10 @@ export default {
 <style lang="scss">
 @import '../../scss/colors.scss';
 
+.chat-panel{
+    min-height: 75vh !important;
+}
+
 .chat-bubble {
   padding: 10px 15px;
   background: #eee;
@@ -77,11 +82,8 @@ export default {
 }
 .chat-bubble h6{
     float: left;
-    padding-right: 5px
-}
-.nameOfSender{
-    float: left;
-    margin-bottom: 5px;
+    padding-right: 5px;
+    padding-bottom:5px
 }
 
 @keyframes slideFromLeft {
@@ -95,7 +97,7 @@ export default {
     }
 }
 
-.offset-md-9 {
+.offset-md-7 {
   .chat-bubble {
     background: $blue;
     color: #fff;
@@ -105,10 +107,9 @@ export default {
 .chat-box-tray {
   background: #eee;
   display: flex;
-  align-items: baseline;
   padding: 10px 15px;
   align-items: center;
-  margin-top: 17px;
+  margin-top: 75vh !important;
   bottom: 0;
   
   input {
