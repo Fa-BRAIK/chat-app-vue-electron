@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="chat-panel mt-2">
+    <div class="chat-panel mt-2 mb-1">
       <div
         class="row no-gutters messages-container"
         v-for="(message, index) in chatPanel"
@@ -56,12 +56,23 @@ export default {
         console.log(this.chatPanel);
         this.message = "";
       }
+    },
+    scrollToEnd() {
+      var container = document.querySelector(".chat-panel");
+      var scrollHeight = container.scrollHeight;
+      container.scrollTop = scrollHeight;
     }
   },
   sockets: {
     publicMessage: function(data) {
       if (data.username !== this.username) this.chatPanel.push(data);
     }
+  },
+  mounted() {
+    this.scrollToEnd();
+  },
+  updated() {
+    this.scrollToEnd();
   }
 };
 </script>
@@ -70,10 +81,10 @@ export default {
 @import "../../scss/colors.scss";
 
 .chat-panel {
-  min-height: 77vh !important;
-  max-height: 77vh !important;
+  min-height: 76vh !important;
+  max-height: 76vh !important;
+  min-width: 72vw !important;
   overflow-y: scroll;
-
 }
 
 .chat-bubble {
@@ -107,21 +118,22 @@ export default {
 }
 
 .chat-box-tray {
+  min-width: 72vw !important;
   background: #eee;
   display: flex;
-  padding: 10px 15px;
+  padding: 10px 10px;
+  border-radius: 7px !important;
   align-items: center;
-  //   margin-top: 75vh !important;
   bottom: 0;
 
   input {
-    margin: 0 10px;
-    padding: 6px 2px;
+    margin: 0 0 0 16px;
+    padding: 6px 10px;
   }
 
   i {
     color: grey;
-    font-size: 30px;
+    font-size: 25px;
     vertical-align: middle;
 
     &:last-of-type {

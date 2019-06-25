@@ -3,7 +3,7 @@
     <div class="settings-tray text-center">
       <h6><a href="">Public</a> | <a href="">Private</a></h6>
     </div>
-    <div class="text-center" v-if="friends.length === 0"> 
+    <div class="text-center mt-4" v-if="friends.length === 0"> 
       <h6 class="display-5">You have no contact online!</h6>
     </div>
       <div class="text-center mt-3 contactsHolder" v-else>

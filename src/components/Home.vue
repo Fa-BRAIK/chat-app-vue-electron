@@ -9,7 +9,7 @@
       </friend-drawer>
     </div>
     <div class="col-md-8 ml-3 mt-2">
-        <div class="settings-tray">
+        <div class="chatPanel-holder settings-tray">
             <div class=" no-gutters friend-drawer--grey">
                 <h6> Hello again {{username}} !</h6>
                 <!-- <span class="settings-tray--right">
@@ -66,10 +66,15 @@ html, body {
 #app {
   min-width: 100vw !important;
   min-height: 100% !important;
+
 }
 
 body {
   text-rendering: optimizeLegibility;
+}
+
+.chatPanel-holder{
+  min-width: 72vw !important;
 }
 
 .container {
