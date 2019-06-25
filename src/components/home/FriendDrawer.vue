@@ -6,10 +6,10 @@
     <div class="text-center" v-if="friends.length === 0"> 
       <h6 class="display-5">You have no contact online!</h6>
     </div>
-      <div class="text-center mt-3" v-else>
+      <div class="text-center mt-3 contactsHolder" v-else>
           <h6 class="mb-3">Contacts online :</h6>
           <hr>
-        <div  v-for="(friend, index) in friends" :key="index">
+        <div v-for="(friend, index) in friends" :key="index">
         <div class="friend-drawer">
         <img class="profile-image" :src="friend.img" alt="">
         <div class="text">
@@ -60,7 +60,11 @@ export default {
 
 <style lang="scss">
 @import '../../scss/colors.scss';
-
+.contactsHolder{
+  min-height: 85vh !important;
+  max-height: 85vh !important;
+  overflow-y: scroll;
+}
 .settings-tray {
   background: #eee;
   padding: 10px 15px;
