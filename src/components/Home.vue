@@ -1,6 +1,6 @@
 <template>
   <div class="row no-gutters">
-    <div class="col-md-4 border-right">
+    <div class="col-md-3 border-right">
       <friend-drawer 
         :username="userInfo.username"
         :users="userInfo.users"
@@ -8,14 +8,14 @@
       >
       </friend-drawer>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 ml-3 mt-2">
         <div class="settings-tray">
-            <div class="friend-drawer no-gutters friend-drawer--grey">
-                
-                <span class="settings-tray--right">
+            <div class=" no-gutters friend-drawer--grey">
+                <h6> Hello again {{username}} !</h6>
+                <!-- <span class="settings-tray--right">
                   <i class="material-icons">cached</i>
                   <i class="material-icons">menu</i>
-                </span>
+                </span> -->
             </div>
         </div>
         <chat-panel :username='username'></chat-panel>

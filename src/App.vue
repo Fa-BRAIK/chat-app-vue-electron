@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <div class="container">
+        <div class="">
             
             <router-view 
                 :username="username"
@@ -27,3 +27,11 @@ export default {
     }
 }
 </script>
+
+<style>
+#app{
+    overflow: hidden
+}
+
+</style>
+

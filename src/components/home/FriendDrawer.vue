@@ -1,12 +1,15 @@
 <template>
-  <div>
-    <div class="settings-tray">
-      <img class="profile-image" src="/img/avatar.svg" alt="">
+  <div class="mr-2 ml-2 mt-2">
+    <div class="settings-tray text-center">
+      <h6><a href="">Public</a> | <a href="">Private</a></h6>
     </div>
     <div class="text-center" v-if="friends.length === 0"> 
       <h6 class="display-5">You have no contact online!</h6>
     </div>
-      <div v-else v-for="(friend, index) in friends" :key="index">
+      <div class="text-center mt-3" v-else>
+          <h6 class="mb-3">Contacts online :</h6>
+          <hr>
+        <div  v-for="(friend, index) in friends" :key="index">
         <div class="friend-drawer">
         <img class="profile-image" :src="friend.img" alt="">
         <div class="text">
@@ -17,6 +20,8 @@
       </div>
       <hr>
     </div>
+      </div>
+      
   </div>
 </template>
 

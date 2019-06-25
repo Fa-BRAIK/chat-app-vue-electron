@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div id="login" class="col-8 col-lg-6 mx-auto">
+        <div id="login" class="col-md-6 col-lg-6 mx-auto">
             <h1 class="display-4 text-center mt-5 mb-5">Login</h1>
             <div class="alert alert-danger" v-show="isErrorMessage()">
                 <p>{{ errorMessage }}</p>
@@ -46,6 +46,7 @@ export default {
 <style lang="scss" scoped>
 .row {
     margin-top: 5%;
+    overflow: hidden;
 }
 
 #login {
