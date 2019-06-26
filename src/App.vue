@@ -24,6 +24,11 @@ export default {
             this.username = data.username
             this.users = data.users
         }
+    },
+    sockets: {
+        logout: function(data) {
+            this.users = data.users
+        }
     }
 }
 </script>

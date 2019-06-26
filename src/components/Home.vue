@@ -40,6 +40,11 @@ export default {
       users: []
     }
   }),
+  watch: {
+    users: function(newVal) {
+      this.userInfo.users = newVal
+    }
+  },
   methods: {
     userChangeEvent(username) { this.choosedUser = username },
   },
