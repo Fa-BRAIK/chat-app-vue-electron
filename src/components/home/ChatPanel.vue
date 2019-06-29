@@ -9,7 +9,8 @@
         <div class="col-md-5" :class="message.side">
           <div class="chat-bubble">
             <h6 class="nameOfSender">{{message.username}} :</h6>
-            {{ message.content }}
+            <span v-show="message.content !== ''">{{ message.content }}</span>
+            <img v-show="message.file !== ''" :src="message.file">
           </div>
         </div>
       </div>
@@ -17,7 +18,8 @@
     <div class="row">
       <div class="col-12">
         <div class="chat-box-tray">
-          <i class="material-icons">attach_file</i>
+          <input hidden id="sendImageInput" type="file" @change="sendImage()">
+          <button class="btn"><i class="material-icons" @click="uploadImage()">attach_file</i></button>
           <input
             class="form-control"
             type="text"
@@ -47,25 +49,48 @@ export default {
         let data = {
           content: this.message,
           side: "offset-md-7",
-          username: this.username
+          username: this.username,
+          file: ''
         };
         this.$socket.emit("message", data);
         data.username = "me";
         this.chatPanel.push(data);
 
-        console.log(this.chatPanel);
         this.message = "";
       }
     },
+    uploadImage() {
+      document.querySelector('#sendImageInput').click()
+    },
+    sendImage() {
+      let file = document.querySelector('#sendImageInput').files[0]
+      let reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        let data = {
+          content: "",
+          side: "offset-md-7",
+          username: this.username,
+          file: reader.result
+        };
+        this.$socket.emit('image', data)
+      }
+    },
     scrollToEnd() {
-      var container = document.querySelector(".chat-panel");
-      var scrollHeight = container.scrollHeight;
-      container.scrollTop = scrollHeight;
+      var container = document.querySelector(".chat-panel")
+      var scrollHeight = container.scrollHeight
+      container.scrollTop = scrollHeight
     }
   },
   sockets: {
     publicMessage: function(data) {
-      if (data.username !== this.username) this.chatPanel.push(data);
+      if (data.username !== this.username) this.chatPanel.push(data)
+    },
+    fileMessage: function(data) {
+      if (data.username !== this.username) data.side = ''
+    
+      console.log(data)
+      this.chatPanel.push(data)
     }
   },
   mounted() {

@@ -39,6 +39,10 @@ io.on('connection', socket => {
         io.sockets.emit('publicMessage', data)
     });
 
+    socket.on('image', data => {
+        io.sockets.emit('fileMessage', data)
+    });
+
     socket.on('disconnect', () => {
         users.delete(username);
         console.log('A user has logged off, users are ', users);
