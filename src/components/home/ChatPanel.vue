@@ -10,7 +10,7 @@
           <div class="chat-bubble">
             <h6 class="nameOfSender">{{message.username}} :</h6>
             <span v-show="message.content !== ''">{{ message.content }}</span>
-            <img v-show="message.file !== ''" :src="message.file">
+            <img v-show="message.file !== ''" :src="message.file" class="messageImage">
           </div>
         </div>
       </div>
@@ -104,6 +104,13 @@ export default {
 
 <style lang="scss">
 @import "../../scss/colors.scss";
+
+.messageImage{
+  max-width : 200px;
+  height: auto;
+  
+}
+
 
 .chat-panel {
   min-height: 76vh !important;
